@@ -121,8 +121,8 @@ func _make_btn_style(color: Color, shadow_s: int) -> StyleBoxFlat:
 func _on_motion_pressed(num: int) -> void:
 	var sprite_path: String = motion_sprites.get(num, "")
 	if sprite_path == "":
-		# 아직 스프라이트 없음 — idle 유지하며 작은 점프 효과
-		_play_idle_with_bounce()
+		# 아직 스프라이트 없음 — 버튼만 반짝이기
+		_flash_button(num)
 		return
 	var texture := load(sprite_path) as Texture2D
 	if not texture:
@@ -142,15 +142,22 @@ func _on_animation_finished() -> void:
 		dalnimi.play("idle")
 
 
-func _play_idle_with_bounce() -> void:
-	# 스프라이트 미준비 시 캐릭터를 위아래로 살짝 튕기는 피드백
+func _flash_button(num: int) -> void:
+	if num < 1 or num > button_grid.get_child_count():
+		return
+	var btn := button_grid.get_child(num - 1) as Button
+	if not btn:
+		return
+	btn.add_theme_stylebox_override("normal", _make_btn_style(Color(1.0, 1.0, 1.0, 0.95), 3))
 	var tween := create_tween()
-	tween.tween_property(dalnimi, "position:y", dalnimi.position.y - 40.0, 0.12).set_ease(Tween.EASE_OUT)
-	tween.tween_property(dalnimi, "position:y", dalnimi.position.y, 0.18).set_ease(Tween.EASE_IN)
+	tween.tween_interval(0.18)
+	tween.tween_callback(func(): btn.add_theme_stylebox_override("normal", _make_btn_style(btn_colors[num - 1], 6)))
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var num: int = int(event.keycode) - int(KEY_0)
+		if num < 1 or num > 9:
+			num = int(event.keycode) - int(KEY_KP_0)  # 넘패드 지원
 		if num >= 1 and num <= 9:
 			_on_motion_pressed(num)
