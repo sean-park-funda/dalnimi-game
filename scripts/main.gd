@@ -73,6 +73,9 @@ func _setup_sprite() -> void:
 		return
 	_apply_sprite_frames(texture, "idle", IDLE_FRAMES, true)
 	dalnimi.scale = Vector2(1.6, 1.6)
+	dalnimi.offset = Vector2.ZERO
+	dalnimi.centered = true
+	dalnimi.texture_repeat = CanvasItem.TEXTURE_REPEAT_DISABLED
 	dalnimi.play("idle")
 	dalnimi.animation_finished.connect(_on_animation_finished)
 
@@ -86,6 +89,7 @@ func _apply_sprite_frames(texture: Texture2D, anim_name: String, frame_count: in
 		var atlas := AtlasTexture.new()
 		atlas.atlas = texture
 		atlas.region = Rect2(i * FRAME_SIZE, 0, FRAME_SIZE, FRAME_SIZE)
+		atlas.filter_clip = true
 		frames.add_frame(anim_name, atlas)
 	dalnimi.sprite_frames = frames
 
@@ -160,13 +164,17 @@ func _flash_button(num: int) -> void:
 
 func _process(_delta: float) -> void:
 	_frame_count += 1
-	# 60프레임(~1초)마다 실제 위치 출력
 	if _frame_count % 60 == 0:
-		print("[POS] local=%s  global=%s" % [dalnimi.position, dalnimi.global_position])
-	# 드리프트 감지 시 전체 위치 강제 복귀
+		print("[POS] pos=%s  offset=%s  scale=%s" % [dalnimi.position, dalnimi.offset, dalnimi.scale])
 	if dalnimi.position.distance_to(_dalnimi_pos) > 1.0:
-		print("[DRIFT] local=%s global=%s → 복귀" % [dalnimi.position, dalnimi.global_position])
+		print("[DRIFT-POS] %s → 복귀" % dalnimi.position)
 		dalnimi.position = _dalnimi_pos
+	if dalnimi.offset.length() > 1.0:
+		print("[DRIFT-OFFSET] %s → 리셋" % dalnimi.offset)
+		dalnimi.offset = Vector2.ZERO
+	if dalnimi.scale.distance_to(Vector2(1.6, 1.6)) > 0.05:
+		print("[DRIFT-SCALE] %s → 리셋" % dalnimi.scale)
+		dalnimi.scale = Vector2(1.6, 1.6)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
