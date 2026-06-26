@@ -1,6 +1,6 @@
 extends Node2D
 
-const IDLE_FRAMES := 25
+const IDLE_FRAMES := 65
 const IDLE_FPS := 5.0
 const MOTION_FPS := 15.0
 const FRAME_SIZE := 512
