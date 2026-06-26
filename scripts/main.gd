@@ -67,7 +67,9 @@ func _setup_sprite() -> void:
 	if not texture:
 		push_error("dalnimi_idle.png를 찾을 수 없습니다.")
 		return
-	_apply_sprite_frames(texture, "idle", IDLE_FRAMES, true)
+	# 임시: idle 스프라이트가 점프로 잘못 생성됨 → 1프레임 정지 포즈로 대체
+	# TODO: sprite-studio에서 올바른 idle(숨쉬기+눈깜박) 스프라이트 수령 후 IDLE_FRAMES로 복구
+	_apply_sprite_frames(texture, "idle", 1, true)
 	dalnimi.scale = Vector2(1.6, 1.6)
 	dalnimi.play("idle")
 	dalnimi.animation_finished.connect(_on_animation_finished)
