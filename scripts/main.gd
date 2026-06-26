@@ -67,18 +67,23 @@ func _setup_title() -> void:
 
 
 func _load_raw_texture(path: String) -> ImageTexture:
+	print("[TEX] 로드 시작: ", path)
 	var f := FileAccess.open(path, FileAccess.READ)
 	if f == null:
-		push_error("파일 열기 실패: %s" % path)
+		push_error("[TEX] 파일 열기 실패: %s (err=%d)" % [path, FileAccess.get_open_error()])
 		return null
 	var buf := f.get_buffer(f.get_length())
 	f.close()
+	print("[TEX] 파일 읽기 완료, 크기=%d bytes" % buf.size())
 	var img := Image.new()
 	var err := img.load_png_from_buffer(buf)
 	if err != OK:
-		push_error("PNG 파싱 실패: %s (err=%d)" % [path, err])
+		push_error("[TEX] PNG 파싱 실패: err=%d" % err)
 		return null
-	return ImageTexture.create_from_image(img)
+	print("[TEX] 이미지 크기: %dx%d" % [img.get_width(), img.get_height()])
+	var tex := ImageTexture.create_from_image(img)
+	print("[TEX] 텍스처 생성 완료: %s" % ("OK" if tex else "null"))
+	return tex
 
 func _setup_sprite() -> void:
 	var texture := _load_raw_texture(motion_sprites["idle"])
