@@ -27,7 +27,7 @@ var btn_colors := [
 # 모션별 스프라이트 파일명 (추후 순차 추가)
 var motion_sprites := {
 	"idle": "res://assets/sprites/dalnimi_idle.png",
-	1: "",  # 손 흔들기 — 추가 예정
+	1: "res://assets/sprites/motion_1_wave.png",
 	2: "",  # 폴짝 점프 — 추가 예정
 	3: "",  # 박수치기 — 추가 예정
 	4: "",  # 빙글 돌기 — 추가 예정
@@ -38,9 +38,10 @@ var motion_sprites := {
 	9: "",  # 만세 — 추가 예정
 }
 
-# 모션별 프레임 수 (추후 각 모션 스프라이트 완성 시 업데이트)
+# 모션별 프레임 수
 var motion_frame_counts := {
 	"idle": 49,
+	1: 59,  # 손 흔들기
 }
 
 var current_motion := "idle"
