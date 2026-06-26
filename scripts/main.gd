@@ -66,8 +66,15 @@ func _setup_title() -> void:
 	label.add_theme_color_override("font_color", Color(0.88, 0.3, 0.52, 1.0))
 
 
+func _load_raw_texture(path: String) -> ImageTexture:
+	var img := Image.load_from_file(path)
+	if img == null:
+		push_error("이미지 로드 실패: %s" % path)
+		return null
+	return ImageTexture.create_from_image(img)
+
 func _setup_sprite() -> void:
-	var texture := load(motion_sprites["idle"]) as Texture2D
+	var texture := _load_raw_texture(motion_sprites["idle"])
 	if not texture:
 		push_error("dalnimi_idle.png를 찾을 수 없습니다.")
 		return
@@ -132,7 +139,7 @@ func _on_motion_pressed(num: int) -> void:
 		# 아직 스프라이트 없음 — 버튼만 반짝이기
 		_flash_button(num)
 		return
-	var texture := load(sprite_path) as Texture2D
+	var texture := _load_raw_texture(sprite_path)
 	if not texture:
 		push_error("모션 %d 스프라이트를 찾을 수 없습니다." % num)
 		return
@@ -146,7 +153,7 @@ func _on_animation_finished() -> void:
 	# 모션 완료 후 idle 복귀
 	if current_motion != "idle":
 		current_motion = "idle"
-		_apply_sprite_frames(load(motion_sprites["idle"]) as Texture2D, "idle", IDLE_FRAMES, true)
+		_apply_sprite_frames(_load_raw_texture(motion_sprites["idle"]), "idle", IDLE_FRAMES, true)
 		dalnimi.play("idle")
 
 
