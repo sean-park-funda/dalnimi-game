@@ -1,0 +1,13 @@
+# Godot
+.godot/
+*.uid
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Export
+export/
+*.apk
+*.aab
+*.ipa
