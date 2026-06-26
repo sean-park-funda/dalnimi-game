@@ -47,7 +47,8 @@ var motion_frame_counts := {
 }
 
 var current_motion := "idle"
-var _dalnimi_pos := Vector2(430.0, 540.0)  # .tscn 위치와 동일
+var _dalnimi_pos := Vector2(430.0, 540.0)
+var _frame_count := 0
 
 @onready var dalnimi: AnimatedSprite2D = $Dalnimi
 @onready var button_grid: GridContainer = $ButtonGrid
@@ -158,10 +159,14 @@ func _flash_button(num: int) -> void:
 
 
 func _process(_delta: float) -> void:
-	# 위치 드리프트 감지 및 고정
-	if dalnimi.position.x != _dalnimi_pos.x:
-		print("[DRIFT] x=%.2f → 강제 복귀" % dalnimi.position.x)
-		dalnimi.position.x = _dalnimi_pos.x
+	_frame_count += 1
+	# 60프레임(~1초)마다 실제 위치 출력
+	if _frame_count % 60 == 0:
+		print("[POS] local=%s  global=%s" % [dalnimi.position, dalnimi.global_position])
+	# 드리프트 감지 시 전체 위치 강제 복귀
+	if dalnimi.position.distance_to(_dalnimi_pos) > 1.0:
+		print("[DRIFT] local=%s global=%s → 복귀" % [dalnimi.position, dalnimi.global_position])
+		dalnimi.position = _dalnimi_pos
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
