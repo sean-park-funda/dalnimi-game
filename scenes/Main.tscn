@@ -9,7 +9,7 @@ script = ExtResource("1_main")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.98, 0.94, 1.0, 1.0)
+color = Color(1.0, 1.0, 1.0, 1.0)
 
 [node name="Dalnimi" type="AnimatedSprite2D" parent="."]
 position = Vector2(430.0, 540.0)
