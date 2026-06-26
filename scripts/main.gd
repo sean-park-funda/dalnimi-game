@@ -55,15 +55,8 @@ var _frame_count := 0
 
 
 func _ready() -> void:
-	_setup_title()
 	_setup_sprite()
 	_setup_buttons()
-
-
-func _setup_title() -> void:
-	var label := $TitleLabel as Label
-	label.add_theme_font_size_override("font_size", 72)
-	label.add_theme_color_override("font_color", Color(0.88, 0.3, 0.52, 1.0))
 
 
 # PNG 파일을 읽어 Image 반환 (Godot import 파이프라인 우회)
