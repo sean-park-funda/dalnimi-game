@@ -151,6 +151,6 @@ func _play_idle_with_bounce() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		var num := event.keycode - KEY_0
+		var num: int = int(event.keycode) - int(KEY_0)
 		if num >= 1 and num <= 9:
 			_on_motion_pressed(num)
