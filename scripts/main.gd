@@ -33,7 +33,7 @@ var motion_sprites := {
 	6: "res://assets/sprites/motion_6_surprise.png",
 	7: "res://assets/sprites/motion_7_dance.png",
 	8: "res://assets/sprites/motion_8_sleepy.png",
-	9: "",
+	9: "res://assets/sprites/motion_9_hurray.png",
 }
 
 var motion_frame_counts := {
@@ -46,6 +46,7 @@ var motion_frame_counts := {
 	6: 46,
 	7: 60,
 	8: 55,
+	9: 45,
 }
 
 var current_motion := "idle"
