@@ -47,6 +47,7 @@ var motion_frame_counts := {
 }
 
 var current_motion := "idle"
+var _dalnimi_pos := Vector2(430.0, 540.0)  # .tscn 위치와 동일
 
 @onready var dalnimi: AnimatedSprite2D = $Dalnimi
 @onready var button_grid: GridContainer = $ButtonGrid
@@ -154,6 +155,13 @@ func _flash_button(num: int) -> void:
 	var tween := create_tween()
 	tween.tween_interval(0.18)
 	tween.tween_callback(func(): btn.add_theme_stylebox_override("normal", _make_btn_style(btn_colors[num - 1], 6)))
+
+
+func _process(_delta: float) -> void:
+	# 위치 드리프트 감지 및 고정
+	if dalnimi.position.x != _dalnimi_pos.x:
+		print("[DRIFT] x=%.2f → 강제 복귀" % dalnimi.position.x)
+		dalnimi.position.x = _dalnimi_pos.x
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
