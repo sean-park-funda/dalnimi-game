@@ -67,9 +67,16 @@ func _setup_title() -> void:
 
 
 func _load_raw_texture(path: String) -> ImageTexture:
-	var img := Image.load_from_file(path)
-	if img == null:
-		push_error("이미지 로드 실패: %s" % path)
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		push_error("파일 열기 실패: %s" % path)
+		return null
+	var buf := f.get_buffer(f.get_length())
+	f.close()
+	var img := Image.new()
+	var err := img.load_png_from_buffer(buf)
+	if err != OK:
+		push_error("PNG 파싱 실패: %s (err=%d)" % [path, err])
 		return null
 	return ImageTexture.create_from_image(img)
 
