@@ -107,7 +107,9 @@ func _setup_buttons() -> void:
 	for i in range(1, 10):
 		var btn := Button.new()
 		btn.text = str(i)
-		btn.custom_minimum_size = Vector2(0, 270)
+		btn.custom_minimum_size = Vector2(0, 0)
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		btn.add_theme_font_size_override("font_size", 90)
 		btn.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 		btn.add_theme_color_override("font_hover_color", Color(1, 1, 1, 1))
