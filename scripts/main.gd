@@ -29,7 +29,10 @@ var motion_sprites := {
 	2: "res://assets/sprites/motion_2_jump.png",
 	3: "res://assets/sprites/motion_3_clap.png",
 	4: "res://assets/sprites/motion_4_spin.png",
-	5: "", 6: "", 7: "", 8: "", 9: "",
+	5: "res://assets/sprites/motion_5_heart.png",
+	6: "res://assets/sprites/motion_6_surprise.png",
+	7: "res://assets/sprites/motion_7_dance.png",
+	8: "", 9: "",
 }
 
 var motion_frame_counts := {
@@ -38,6 +41,9 @@ var motion_frame_counts := {
 	2: 29,
 	3: 52,
 	4: 65,
+	5: 52,
+	6: 46,
+	7: 60,
 }
 
 var current_motion := "idle"
