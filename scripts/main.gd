@@ -58,7 +58,7 @@ func _ready() -> void:
 
 func _setup_title() -> void:
 	var label := $TitleLabel as Label
-	label.add_theme_font_size_override("font_size", 88)
+	label.add_theme_font_size_override("font_size", 72)
 	label.add_theme_color_override("font_color", Color(0.88, 0.3, 0.52, 1.0))
 
 
@@ -68,7 +68,7 @@ func _setup_sprite() -> void:
 		push_error("dalnimi_idle.png를 찾을 수 없습니다.")
 		return
 	_apply_sprite_frames(texture, "idle", IDLE_FRAMES, true)
-	dalnimi.scale = Vector2(1.7, 1.7)
+	dalnimi.scale = Vector2(1.6, 1.6)
 	dalnimi.play("idle")
 	dalnimi.animation_finished.connect(_on_animation_finished)
 
@@ -92,8 +92,8 @@ func _setup_buttons() -> void:
 	for i in range(1, 10):
 		var btn := Button.new()
 		btn.text = str(i)
-		btn.custom_minimum_size = Vector2(0, 185)
-		btn.add_theme_font_size_override("font_size", 80)
+		btn.custom_minimum_size = Vector2(0, 270)
+		btn.add_theme_font_size_override("font_size", 90)
 		btn.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 		btn.add_theme_color_override("font_hover_color", Color(1, 1, 1, 1))
 		btn.add_theme_color_override("font_pressed_color", Color(1, 1, 1, 1))
