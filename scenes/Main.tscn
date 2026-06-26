@@ -6,9 +6,10 @@
 script = ExtResource("1_main")
 
 [node name="Background" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(1.0, 1.0, 1.0, 1.0)
 
 [node name="Dalnimi" type="AnimatedSprite2D" parent="."]
