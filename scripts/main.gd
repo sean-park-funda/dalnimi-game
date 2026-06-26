@@ -41,7 +41,7 @@ var motion_sprites := {
 # 모션별 프레임 수
 var motion_frame_counts := {
 	"idle": 49,
-	1: 59,  # 손 흔들기
+	1: 53,  # 손 흔들기
 }
 
 var current_motion := "idle"
