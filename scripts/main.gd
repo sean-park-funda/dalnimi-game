@@ -29,7 +29,7 @@ var btn_colors := [
 var motion_sprites := {
 	"idle": "res://assets/sprites/dalnimi_idle.png",
 	1: "res://assets/sprites/motion_1_wave.png",
-	2: "",  # 폴짝 점프 — 추가 예정
+	2: "res://assets/sprites/motion_2_jump.png",
 	3: "",  # 박수치기 — 추가 예정
 	4: "",  # 빙글 돌기 — 추가 예정
 	5: "",  # 하트 — 추가 예정
@@ -43,6 +43,7 @@ var motion_sprites := {
 var motion_frame_counts := {
 	"idle": 49,
 	1: 53,  # 손 흔들기
+	2: 29,  # 폴짝 점프
 }
 
 var current_motion := "idle"
