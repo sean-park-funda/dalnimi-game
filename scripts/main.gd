@@ -1,7 +1,8 @@
 extends Node2D
 
 const IDLE_FRAMES := 25
-const IDLE_FPS := 15.0
+const IDLE_FPS := 5.0
+const MOTION_FPS := 15.0
 const FRAME_SIZE := 512
 
 # 모션 이름 (1~9번 순서)
@@ -77,7 +78,7 @@ func _apply_sprite_frames(texture: Texture2D, anim_name: String, frame_count: in
 	var frames := SpriteFrames.new()
 	frames.add_animation(anim_name)
 	frames.set_animation_loop(anim_name, loop)
-	frames.set_animation_speed(anim_name, IDLE_FPS)
+	frames.set_animation_speed(anim_name, IDLE_FPS if anim_name == "idle" else MOTION_FPS)
 	for i in frame_count:
 		var atlas := AtlasTexture.new()
 		atlas.atlas = texture
