@@ -50,8 +50,15 @@ var current_motion := "idle"
 
 
 func _ready() -> void:
+	_setup_title()
 	_setup_sprite()
 	_setup_buttons()
+
+
+func _setup_title() -> void:
+	var label := $TitleLabel as Label
+	label.add_theme_font_size_override("font_size", 88)
+	label.add_theme_color_override("font_color", Color(0.88, 0.3, 0.52, 1.0))
 
 
 func _setup_sprite() -> void:
